@@ -5,10 +5,8 @@ export interface TeamMember {
   name: string;
   roleEn: string;
   roleMk: string;
-  roleSq: string;
   bioEn: string;
   bioMk: string;
-  bioSq: string;
   photoUrl?: string | null;
 }
 

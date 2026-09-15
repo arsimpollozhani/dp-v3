@@ -2,7 +2,7 @@ import { LANGS } from "../i18n/dictionaries";
 import type { Lang } from "../i18n/dictionaries";
 import { useLanguage } from "../i18n/LanguageContext";
 
-const LABELS: Record<Lang, string> = { en: "EN", mk: "МК", sq: "SQ" };
+const LABELS: Record<Lang, string> = { en: "EN", mk: "МК" };
 
 export default function LanguageSwitcher(): JSX.Element {
   const { lang, setLang, t } = useLanguage();

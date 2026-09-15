@@ -19,7 +19,7 @@ Review the current implementation for:
 - contact form
 - contact information
 - news/blog
-- multilingual support (english default, macedonian, albanian)
+- multilingual support (english default, macedonian)
 - cookies (consent banner, dismissible, local-only)
 - responsive design (mobile, tablet, desktop, large desktop)
 

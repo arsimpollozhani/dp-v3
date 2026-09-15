@@ -10,10 +10,8 @@ export interface MenuItem {
   isAvailable: boolean;
   nameEn: string;
   nameMk: string;
-  nameSq: string;
   descEn: string;
   descMk: string;
-  descSq: string;
 }
 
 export interface MenuQuery {

@@ -15,7 +15,7 @@ The website must demonstrate:
 - contact form
 - contact information
 - news/blog
-- multilingual support (english default, macedonian, albanian)
+- multilingual support (english default, macedonian)
 - cookie consent
 - responsive design
 - detailed restaurant information
@@ -197,7 +197,6 @@ Support:
 
 - English (default)
 - Macedonian
-- Albanian
 
 Do not duplicate entire React components for different languages.
 

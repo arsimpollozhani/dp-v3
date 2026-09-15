@@ -2,12 +2,12 @@
 
 Welcome! This is the presentation website of **Ohrid Restaurant**, a cozy fictional
 family restaurant — and a university software engineering project that takes you
-from an empty folder to a fully working, three-language, database-backed web app.
+from an empty folder to a fully working, two-language, database-backed web app.
 
 **What you'll find here:**
 
 - 🏠 **8 pages** — Home, About, Menu, Services, Team, News, article pages, Contact
-- 🌍 **3 languages** — English, Macedonian, Albanian behind one global EN/МК/SQ
+- 🌍 **2 languages** — English and Macedonian behind one global EN/МК
   switcher (no duplicated pages, everything translates instantly)
 - 🗄️ **Real data** — menu dishes, team members and news articles served by a
   REST API from a local SQLite database, with photos and trilingual descriptions
@@ -76,7 +76,7 @@ restaurant/
       src/
         main.tsx / App.tsx    # 🌍 LanguageProvider + Router + Layout
         api/                  # typed clients: menu, team, news, contact (no fetch in components!)
-        i18n/                 # en/mk/sq dictionaries + language context + pick() helper
+        i18n/                 # en/mk dictionaries + language context + pick() helper
         components/           # Header, Footer, Hero, *Cards, ContactForm, CookieBanner, …
         pages/                # Home, About, Menu, Services, Team, News, NewsDetail, Contact
         styles/               # variables → base → layout → components → responsive
@@ -86,7 +86,7 @@ restaurant/
       prisma/
         schema.prisma         # MenuItem, TeamMember, NewsPost, ContactMessage
         migrations/           # versioned SQL — the history of the database
-        seed.ts               # trilingual demo content (idempotent, safe to re-run)
+        seed.ts               # bilingual demo content (idempotent, safe to re-run)
       src/
         server.ts / app.ts    # bootstrap + Fastify wiring
         routes/ → controllers/ → services/ → repositories/
@@ -144,7 +144,7 @@ curl -X POST http://localhost:8080/api/contact \
 ## 🧠 Design notes worth knowing
 
 - **Languages without duplication:** UI strings live in three JSON dictionaries;
-  database rows carry `…En/…Mk/…Sq` columns picked at render time with English
+  database rows carry `…En/…Mk` columns picked at render time with English
   fallback. One component tree serves all languages.
 - **Validation twice, errors once:** the form mirrors the Zod rules for instant
   feedback; the server re-validates everything and returns field-level issues

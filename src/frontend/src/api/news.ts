@@ -7,10 +7,8 @@ export interface NewsArticle {
   publishedAt: string;
   titleEn: string;
   titleMk: string;
-  titleSq: string;
   bodyEn: string;
   bodyMk: string;
-  bodySq: string;
 }
 
 export function getNews(): Promise<NewsArticle[]> {

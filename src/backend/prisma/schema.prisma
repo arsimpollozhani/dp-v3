@@ -10,8 +10,8 @@
 // here would add join cost with no real query benefit, so the models stay
 // independent on purpose.
 //
-// I18N NOTE: fixed languages en/mk/sq use suffixed columns (e.g. nameEn,
-// nameMk, nameSq) instead of a Translation table. Three languages are fixed
+// I18N NOTE: fixed languages en/mk use suffixed columns (e.g. nameEn,
+// nameMk) instead of a Translation table. Two languages are fixed
 // by requirements, so joins are avoided and every localized read is a single
 // row fetch. Proper nouns (TeamMember.name, NewsPost.slug) stay untranslated.
 
@@ -42,10 +42,8 @@ model MenuItem {
   isAvailable Boolean @default(true)
   nameEn      String
   nameMk      String
-  nameSq      String
   descEn      String
   descMk      String
-  descSq      String
   createdAt   DateTime @default(now())
 
   @@index([category])
@@ -58,10 +56,8 @@ model TeamMember {
   name      String
   roleEn    String
   roleMk    String
-  roleSq    String
   bioEn     String
   bioMk     String
-  bioSq     String
   photoUrl  String?
   sortOrder Int      @default(0)
   createdAt DateTime @default(now())
@@ -78,10 +74,8 @@ model NewsPost {
   publishedAt DateTime @default(now())
   titleEn     String
   titleMk     String
-  titleSq     String
   bodyEn      String
   bodyMk      String
-  bodySq      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
