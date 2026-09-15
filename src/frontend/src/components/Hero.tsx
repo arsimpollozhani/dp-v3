@@ -31,7 +31,7 @@ export default function Hero(): JSX.Element {
         </p>
         <h1
           id="hero-title"
-          className="font-display max-w-4xl animate-fade-up text-5xl font-black leading-[1.02] tracking-tight delay-100 sm:text-7xl lg:text-8xl"
+          className="font-display max-w-4xl animate-fade-up text-5xl font-black leading-[1.02] tracking-tight text-white delay-100 sm:text-7xl lg:text-8xl"
         >
           {t.hero.title}{" "}
           <em className="text-gold-gradient animate-shimmer-text not-italic sm:italic">✦</em>
