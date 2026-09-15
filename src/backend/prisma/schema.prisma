@@ -17,6 +17,11 @@
 
 generator client {
   provider = "prisma-client-js"
+  // Pinned so `prisma generate` produces the same engines on the host and
+  // inside Docker (node:22-slim, Debian bookworm, OpenSSL 3). Without this,
+  // engine auto-detection can resolve to openssl-1.1.x and the backend
+  // crashes at startup with PrismaClientInitializationError.
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
