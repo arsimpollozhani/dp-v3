@@ -1,0 +1,95 @@
+/* Responsive breakpoints (custom grid; no CSS framework).
+   Mobile-first: base styles target phones, queries scale up. */
+
+/* Mobile: collapse nav into dropdown panel */
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: inline-block;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(250, 247, 241, 0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xs);
+    width: 100%;
+  }
+
+  .nav-list a {
+    display: block;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+  }
+
+  .cookie-banner {
+    left: var(--spacing-sm);
+    right: var(--spacing-sm);
+  }
+
+  .section-cta {
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .site-nav {
+    flex-wrap: wrap;
+  }
+
+  .nav-list {
+    gap: 0;
+  }
+
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .section {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .hero {
+    padding: clamp(5rem, 10vw, 8.5rem) 0;
+  }
+}
+
+/* Large desktop: widen the canvas and scale display type. */
+@media (min-width: 1280px) {
+  :root {
+    --max-content-width: var(--max-content-width-wide);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 4.5vw, 4.5rem);
+  }
+
+  .card-media img {
+    height: 13.5rem;
+  }
+}

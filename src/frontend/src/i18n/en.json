@@ -1,0 +1,171 @@
+{
+  "nav": {
+    "restaurantName": "Ohrid Restaurant",
+    "tagline": "Homestyle kitchen",
+    "home": "Home",
+    "about": "About",
+    "menu": "Menu",
+    "services": "Services",
+    "team": "Team",
+    "news": "News",
+    "contact": "Contact",
+    "skipLink": "Skip to main content",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "primaryNav": "Primary",
+    "languageLabel": "Language"
+  },
+  "hero": {
+    "eyebrow": "Family restaurant · Est. 2009",
+    "title": "Warm food, honest flavours",
+    "subtitle": "Seasonal dishes, wood-fired mains and homemade desserts — served in the heart of the city every day.",
+    "ctaMenu": "See the menu",
+    "ctaContact": "Book a table"
+  },
+  "home": {
+    "aboutTitle": "A small place with a big table",
+    "aboutText": "Ohrid Restaurant is a family-run restaurant serving simple, seasonal food. We cook with local produce, bake our own bread and welcome everyone like a guest at home.",
+    "aboutCta": "Our story",
+    "featuredTitle": "Fresh from the kitchen",
+    "featuredText": "A taste of what is cooking today.",
+    "viewAllMenu": "View full menu",
+    "newsTitle": "Latest news",
+    "newsText": "Menus, music nights and terrace days.",
+    "viewAllNews": "All news",
+    "visitTitle": "Visit us or write to us",
+    "visitText": "Drop by for lunch, book dinner, or send us a message — we reply within one working day.",
+    "visitCta": "Contact us"
+  },
+  "about": {
+    "title": "About us",
+    "subtitle": "Family-run since 2009",
+    "storyTitle": "Our story",
+    "storyP1": "Ohrid Restaurant started as a small neighbourhood kitchen with six tables and one wood oven. Today we serve lunch and dinner every day, but the idea is the same: fresh ingredients, careful cooking and fair prices.",
+    "storyP2": "We work with nearby farms, bake bread each morning and change the menu with the seasons. Children, grandparents and groups are all welcome.",
+    "valuesTitle": "What matters to us",
+    "value1Title": "Fresh & seasonal",
+    "value1Text": "Short menu that changes with the market.",
+    "value2Title": "Fair prices",
+    "value2Text": "Honest portions at honest prices.",
+    "value3Title": "Warm welcome",
+    "value3Text": "Friendly staff, relaxed room, no rush.",
+    "infoTitle": "Good to know",
+    "hoursTitle": "Opening hours",
+    "locationTitle": "Where to find us"
+  },
+  "info": {
+    "address": "Kej Makedonija 1",
+    "addressLabel": "Address",
+    "phone": "+389 2 123 456",
+    "email": "hello@ohridrestaurant.example",
+    "hoursWeekdays": "Mon–Fri: 11:00 – 23:00",
+    "hoursWeekend": "Sat–Sun: 09:00 – 23:00"
+  },
+  "menuPage": {
+    "title": "Our menu",
+    "subtitle": "Cooked fresh every day. Ask the staff about allergens.",
+    "filterAll": "All",
+    "filterStarter": "Starters",
+    "filterMain": "Mains",
+    "filterDessert": "Desserts",
+    "filterDrink": "Drinks",
+    "loading": "Loading dishes…",
+    "error": "We could not load the menu. Please try again.",
+    "retry": "Try again",
+    "empty": "No dishes in this category right now.",
+    "unavailable": "Sold out",
+    "currency": "MKD"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "More than lunch and dinner",
+    "service1Title": "Catering",
+    "service1Text": "Buffets and finger food for offices, weddings and family parties — from 10 to 200 guests.",
+    "service2Title": "Private events",
+    "service2Text": "A separate room for birthdays and business dinners, with a set menu of your choice.",
+    "service3Title": "Delivery & takeaway",
+    "service3Text": "Call ahead and pick up in 20 minutes, or order delivery within the city centre.",
+    "service4Title": "Gift vouchers",
+    "service4Text": "Treat someone to dinner. Vouchers in any amount, valid for one year.",
+    "ctaTitle": "Need something special?",
+    "ctaText": "Tell us about your event and we will prepare an offer.",
+    "ctaButton": "Contact us"
+  },
+  "teamPage": {
+    "title": "Our team",
+    "subtitle": "The people behind the stove and the tables",
+    "loading": "Loading the team…",
+    "error": "We could not load the team. Please try again.",
+    "retry": "Try again",
+    "empty": "No team members to show right now."
+  },
+  "newsPage": {
+    "title": "News",
+    "subtitle": "Menus, events and small stories",
+    "loading": "Loading news…",
+    "error": "We could not load the news. Please try again.",
+    "retry": "Try again",
+    "empty": "No news yet. Please check back soon.",
+    "readMore": "Read more",
+    "backToNews": "Back to all news",
+    "notFoundTitle": "Article not found",
+    "notFoundText": "This article does not exist or was removed.",
+    "detailError": "We could not load this article. Please try again."
+  },
+  "contactPage": {
+    "title": "Contact",
+    "subtitle": "Book a table or ask us anything",
+    "infoTitle": "Restaurant info",
+    "formTitle": "Send us a message"
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "optional": "optional",
+    "subject": "Subject",
+    "message": "Message",
+    "submit": "Send message",
+    "sending": "Sending…",
+    "successTitle": "Thank you! Message received.",
+    "successText": "We will reply within one working day.",
+    "sendAnother": "Send another message",
+    "errorTitle": "Something went wrong",
+    "errorGeneric": "We could not send your message. Please try again later.",
+    "errRequired": "This field is required.",
+    "errNameLength": "Name must be 2–80 characters.",
+    "errEmailInvalid": "Please enter a valid email address.",
+    "errPhoneInvalid": "Phone may contain digits, spaces and + ( ) - , 6–20 characters.",
+    "errSubjectLength": "Subject must be 3–120 characters.",
+    "errMessageLength": "Message must be 10–2000 characters.",
+    "namePlaceholder": "e.g. Ana Petrova",
+    "emailPlaceholder": "e.g. ana@example.com",
+    "phonePlaceholder": "e.g. +389 70 123 456",
+    "subjectPlaceholder": "e.g. Table for Friday",
+    "messagePlaceholder": "Write your message here…"
+  },
+  "cookie": {
+    "label": "Cookie consent",
+    "text": "We use only essential local storage (language and cookie choice). No tracking cookies. Is that OK?",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "footer": {
+    "blurb": "Family restaurant serving seasonal food, wood-fired mains and homemade desserts.",
+    "navLabel": "Footer",
+    "navTitle": "Explore",
+    "contactTitle": "Contact",
+    "hoursTitle": "Hours",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist.",
+    "homeLink": "Back to home"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Try again"
+  }
+}

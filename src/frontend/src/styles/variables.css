@@ -1,0 +1,52 @@
+:root {
+  /* Luxury restaurant palette: warm ivory, deep espresso, ember red, brass gold. */
+  --color-background: #faf7f1;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f3ece0;
+  --color-surface-deep: #efe3d0;
+  --color-ink: #201713;
+  --color-text: #2e221a;
+  --color-muted: #7a6a58;
+  --color-primary: #8f2d14;
+  --color-primary-dark: #6d220e;
+  --color-primary-soft: #f7e8dd;
+  --color-gold: #c9a227;
+  --color-gold-soft: #f1e5c3;
+  --color-border: #e6d8c2;
+  --color-success-bg: #edf5ea;
+  --color-error-bg: #fbeeee;
+  --color-error-text: #8c1d1d;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3.5rem;
+  --spacing-2xl: 5rem;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Playfair Display", "Didot", Georgia, "Times New Roman", serif;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 2rem;
+  --font-size-display: clamp(2.4rem, 5vw + 1rem, 4rem);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(32, 23, 19, 0.06), 0 2px 8px rgba(32, 23, 19, 0.06);
+  --shadow-md: 0 2px 6px rgba(32, 23, 19, 0.08), 0 16px 40px -16px rgba(32, 23, 19, 0.28);
+  --shadow-lg: 0 4px 12px rgba(32, 23, 19, 0.12), 0 32px 64px -24px rgba(32, 23, 19, 0.38);
+
+  --max-content-width: 72rem;
+  --max-content-width-wide: 80rem;
+
+  /* Motion tokens: every animation/transition should reference these. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 280ms;
+  --duration-slow: 640ms;
+}

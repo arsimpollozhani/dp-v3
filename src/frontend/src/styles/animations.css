@@ -1,0 +1,153 @@
+/* Animations: hero entrance, page transitions, scroll reveals, hovers.
+   All motion honors prefers-reduced-motion (see the override at the end). */
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-glow {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes banner-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero entrance (CSS-only, runs on first paint). */
+.hero-eyebrow {
+  animation: hero-rise var(--duration-slow) var(--ease-out) both;
+}
+
+.hero-title {
+  animation: hero-rise var(--duration-slow) var(--ease-out) 90ms both;
+}
+
+.hero-subtitle {
+  animation: hero-rise var(--duration-slow) var(--ease-out) 180ms both;
+}
+
+.hero .btn-custom {
+  animation: hero-rise var(--duration-slow) var(--ease-out) 270ms both;
+}
+
+/* Subtle page transition on route change (keyed wrapper in App). */
+.page-transition {
+  animation: page-fade var(--duration-normal) var(--ease-out) both;
+}
+
+/* Scroll-based reveal (elements get .is-visible from the Reveal component). */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cookie banner entrance. */
+.cookie-banner {
+  animation: banner-slide-up var(--duration-normal) var(--ease-out) both;
+}
+
+/* Mobile nav panel transition. */
+@media (max-width: 767px) {
+  .site-nav {
+    transform-origin: top;
+    transition:
+      opacity var(--duration-normal) var(--ease-out),
+      transform var(--duration-normal) var(--ease-out);
+  }
+
+  .site-nav:not(.is-open) {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.98);
+  }
+
+  .site-nav.is-open {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Reduced motion: no entrance, reveal, hover lift or image zoom. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-eyebrow,
+  .hero-title,
+  .hero-subtitle,
+  .hero .btn-custom,
+  .page-transition,
+  .cookie-banner {
+    animation: none;
+  }
+
+  .card-custom:hover,
+  .btn-custom:hover,
+  .value-card:hover {
+    transform: none;
+  }
+
+  .card-custom:hover .card-media img,
+  .teaser-art:hover img {
+    transform: none;
+  }
+}
