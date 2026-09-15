@@ -28,7 +28,7 @@ Frontend:
 - TypeScript
 - Vite
 - React Router
-- custom CSS only (no CSS frameworks: no Tailwind, no Bootstrap)
+- custom CSS + Tailwind CSS (utility framework)
 
 Backend:
 
@@ -90,12 +90,14 @@ Use accessible labels and buttons.
 
 Use React Router for pages.
 
-Use custom CSS for styling. Do not use Tailwind, Bootstrap, or any other CSS
-framework. The grid, utilities and components in `src/frontend/src/styles/`
-are hand-written.
+Use Tailwind CSS utilities for layout and styling, plus custom CSS for brand
+details. The Tailwind theme (brand colors, fonts, keyframes) lives in
+`src/frontend/tailwind.config.js`; brand helpers (gold gradient text, glass,
+grain, marquee, link underlines) live in `src/frontend/src/styles/tailwind.css`.
 
 Keep CSS organized by responsibility:
 
+- `tailwind.css` → Tailwind directives + brand helpers
 - `variables.css` → design + motion tokens
 - `base.css` → typography, focus states
 - `layout.css` → header/footer/sections + custom grid/utilities

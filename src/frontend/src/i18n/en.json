@@ -20,7 +20,14 @@
     "title": "Warm food, honest flavours",
     "subtitle": "Seasonal dishes, wood-fired mains and homemade desserts — served in the heart of the city every day.",
     "ctaMenu": "See the menu",
-    "ctaContact": "Book a table"
+    "ctaContact": "Book a table",
+    "scroll": "Scroll to explore",
+    "stat1value": "15+",
+    "stat1label": "Years by the fire",
+    "stat2value": "40+",
+    "stat2label": "Seasonal dishes",
+    "stat3value": "4.9",
+    "stat3label": "Guest rating"
   },
   "home": {
     "aboutTitle": "A small place with a big table",
@@ -34,7 +41,15 @@
     "viewAllNews": "All news",
     "visitTitle": "Visit us or write to us",
     "visitText": "Drop by for lunch, book dinner, or send us a message — we reply within one working day.",
-    "visitCta": "Contact us"
+    "visitCta": "Contact us",
+    "marquee": [
+      "Wood-fired",
+      "Seasonal",
+      "Homemade bread",
+      "Local produce",
+      "Terrace nights",
+      "Live music"
+    ]
   },
   "about": {
     "title": "About us",

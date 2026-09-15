@@ -31,7 +31,7 @@ Review the current implementation for:
 - responsive behavior on all breakpoints
 - animation quality (tasteful, not distracting)
 - `prefers-reduced-motion` support
-- custom CSS only (no Tailwind/Bootstrap); CSS variables used
+- Tailwind + custom CSS used well; CSS variables used
 - accessibility (semantic HTML, labels, focus states, contrast, keyboard nav)
 - unnecessary complexity
 

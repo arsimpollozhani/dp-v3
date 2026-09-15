@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import { LanguageProvider } from "./i18n/LanguageContext.tsx";
+import "./styles/tailwind.css";
 import "./styles/variables.css";
 import "./styles/base.css";
 import "./styles/layout.css";

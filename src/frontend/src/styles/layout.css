@@ -311,8 +311,9 @@
   font-size: 1.05rem;
 }
 
-/* Page container rhythm */
+/* Page container rhythm (offset clears the fixed glass header). */
 main.container {
+  padding-top: 5.5rem;
   padding-bottom: var(--spacing-lg);
 }
 

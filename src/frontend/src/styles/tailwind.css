@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand helpers that pair with Tailwind utilities. */
+
+@layer components {
+  .font-display {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(100deg, #f6e27a 0%, #d4a437 40%, #f9efc4 55%, #d4a437 70%, #f6e27a 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .animate-shimmer-text {
+    animation: shimmer 5s linear infinite;
+  }
+
+  .glass-dark {
+    background: rgba(20, 16, 16, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #d4a437, #f6e27a);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-underline:hover::after,
+  .link-underline.active::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Staggered hero entrance. */
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+}
+
+/* Reduced motion: kill the showpiece animations, keep content visible. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .animate-float,
+  .animate-float-slow,
+  .animate-ken-burns,
+  .animate-glow,
+  .animate-shimmer-text {
+    animation: none !important;
+  }
+}

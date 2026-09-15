@@ -57,7 +57,7 @@ docker compose down              # stop everything, keep your data
 
 | Layer | What's inside |
 |-------|---------------|
-| 🎨 Frontend | React 18, TypeScript, Vite, React Router 6, hand-written custom CSS (no CSS frameworks) |
+| 🎨 Frontend | React 18, TypeScript, Vite, React Router 6, Tailwind CSS + custom CSS |
 | ⚙️ Backend | Node.js 22, Fastify 4, TypeScript, Zod validation, Prisma 5 |
 | 🗃️ Database | SQLite file (`src/backend/prisma/dev.db` locally) with migrations + trilingual seed data |
 | 📦 Delivery | Docker + Docker Compose (one command starts everything) |

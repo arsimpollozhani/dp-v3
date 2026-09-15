@@ -28,13 +28,26 @@ export default function CookieBanner(): JSX.Element {
   };
 
   return (
-    <div className="cookie-banner" role="dialog" aria-live="polite" aria-label={t.cookie.label}>
-      <p className="cookie-text">{t.cookie.text}</p>
-      <div className="d-flex gap-2">
-        <button type="button" className="btn-custom btn-primary-custom btn-sm-custom" onClick={() => persist("accepted")}>
+    <div
+      role="dialog"
+      aria-live="polite"
+      aria-label={t.cookie.label}
+      className="fixed inset-x-4 bottom-4 z-[100] mx-auto flex max-w-3xl animate-fade-up flex-wrap items-center gap-4 rounded-3xl border border-gold/25 bg-ink/90 p-5 text-cream shadow-lift backdrop-blur-xl sm:p-6"
+    >
+      <p className="min-w-[16rem] flex-1 text-sm leading-relaxed text-cream/75">{t.cookie.text}</p>
+      <div className="flex gap-2">
+        <button
+          type="button"
+          onClick={() => persist("accepted")}
+          className="rounded-full bg-gradient-to-r from-gold-soft to-gold px-5 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-ink shadow-glow transition-all duration-300 hover:shadow-lift active:scale-95"
+        >
           {t.cookie.accept}
         </button>
-        <button type="button" className="btn-custom btn-outline-custom btn-sm-custom" onClick={() => persist("declined")}>
+        <button
+          type="button"
+          onClick={() => persist("declined")}
+          className="rounded-full border border-cream/25 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-cream/80 transition-all duration-300 hover:border-gold/60 hover:text-gold-soft active:scale-95"
+        >
           {t.cookie.decline}
         </button>
       </div>

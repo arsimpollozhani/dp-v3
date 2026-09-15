@@ -11,7 +11,7 @@ Use:
 - React
 - TypeScript
 - semantic HTML
-- custom CSS only (no CSS frameworks — no Tailwind, no Bootstrap)
+- Tailwind CSS utilities + custom CSS for brand details
 - CSS variables from `src/frontend/src/styles/variables.css`
 - the `Reveal` component for scroll-based reveals
 

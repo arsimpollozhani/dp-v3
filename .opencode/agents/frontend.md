@@ -11,13 +11,14 @@ Technology:
 - TypeScript
 - Vite
 - React Router
-- custom CSS only (no CSS frameworks — no Tailwind, no Bootstrap)
+- Tailwind CSS + custom CSS for brand details
 
-Design system lives in `src/frontend/src/styles/`:
+Design system: Tailwind theme in `src/frontend/tailwind.config.js`, brand
+helpers in `src/frontend/src/styles/tailwind.css`, plus:
 
 - `variables.css` → design + motion tokens
 - `base.css` → typography, focus states
-- `layout.css` → header/footer/sections + hand-written grid/utilities
+- `layout.css` → header/footer/sections + custom grid/utilities
 - `components.css` → hero, cards, buttons, forms, banner
 - `animations.css` → keyframes, page transitions, scroll reveals
 - `responsive.css` → breakpoints (mobile, tablet, desktop, large desktop)
@@ -40,7 +41,7 @@ Rules:
 - use semantic HTML
 - keep components small
 - reuse existing components
-- use custom CSS for styling; never add Tailwind or Bootstrap
+- use Tailwind utilities first; custom CSS for brand details only
 - reuse existing CSS variables for colors, spacing, typography
 - design must be modern and polished (contemporary restaurant aesthetic)
 - add tasteful animations only (hero entrance, scroll reveal via the `Reveal`
