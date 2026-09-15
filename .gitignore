@@ -1,0 +1,28 @@
+# Environment variables
+**/.env
+**/.env.*
+!**/.env.example
+
+# Node dependencies
+**/node_modules/
+
+# Build output
+**/dist/
+**/build/
+
+# Logs
+**/*.log
+
+# Local SQLite database files (Prisma dev.db, Docker volume dumps) — never commit.
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.sqlite
+**/*.sqlite-shm
+**/*.sqlite-wal
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

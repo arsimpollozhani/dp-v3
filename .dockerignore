@@ -1,0 +1,13 @@
+# Keep Docker build contexts small. The Dockerfiles rebuild what they need.
+node_modules/
+src/*/node_modules/
+src/*/dist/
+.git/
+.opencode/
+**/.env
+**/*.log
+.vscode/
+.idea/
+*.db
+*.db-shm
+*.db-wal
