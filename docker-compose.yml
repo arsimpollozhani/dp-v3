@@ -3,20 +3,16 @@ services:
     build:
       context: .
       dockerfile: src/backend/Dockerfile
-    restart: unless-stopped
-    environment:
-      DATABASE_URL: file:/data/restaurant.db
-      PORT: 3000
+    cpus: 0.5
+    mem_limit: 512m
     volumes:
-      - sqlite-data:/data
+      - .stack-data/data:/data
 
   frontend:
     build:
       context: .
       dockerfile: src/frontend/Dockerfile
-    restart: unless-stopped
+    cpus: 0.5
+    mem_limit: 512m
     depends_on:
       - backend
-
-volumes:
-  sqlite-data:
