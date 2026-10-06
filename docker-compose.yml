@@ -1,33 +1,14 @@
-# RepoRun stack definition. Set container env values (DATABASE_URL, PORT,
-# NODE_ENV) in the RepoRun Team 24 stack UI, not here.
+# RepoRun stack definition. Set no backend; the frontend serves static data.
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: src/backend/Dockerfile
-    cpus: 0.5
-    mem_limit: 512m
-    volumes:
-      - .stack-data/data:/data
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
-        ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
-
   frontend:
     build:
       context: .
       dockerfile: src/frontend/Dockerfile
     cpus: 0.25
     mem_limit: 256m
-    depends_on:
-      backend:
-        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

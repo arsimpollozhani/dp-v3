@@ -6,13 +6,12 @@
     "src/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
+    "dev": "npm run dev --workspace frontend",
     "dev:frontend": "npm run dev --workspace frontend",
-    "dev:backend": "npm run dev --workspace backend",
-    "build": "npm run build --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build --workspace frontend",
+    "typecheck": "npm run typecheck --workspace frontend",
     "up": "docker compose up --build",
     "down": "docker compose down",
-    "logs": "docker compose logs -f backend"
+    "logs": "docker compose logs -f frontend"
   }
 }

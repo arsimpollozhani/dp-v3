@@ -6,12 +6,10 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY src/frontend/package.json src/frontend/package.json
-COPY src/backend/package.json src/backend/package.json
 RUN npm ci
 
 COPY src/frontend ./src/frontend
 
-# Same-origin /api is served by nginx, so no VITE_API_URL is baked in.
 WORKDIR /app/src/frontend
 RUN npm run build
 

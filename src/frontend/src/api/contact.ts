@@ -1,5 +1,3 @@
-import { apiPost } from "./client";
-
 export interface ContactPayload {
   name: string;
   email: string;
@@ -14,5 +12,8 @@ export interface ContactResult {
 }
 
 export function postContact(payload: ContactPayload): Promise<ContactResult> {
-  return apiPost<ContactPayload, ContactResult>("/api/contact", payload);
+  void payload;
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ id: Date.now() }), 400);
+  });
 }
