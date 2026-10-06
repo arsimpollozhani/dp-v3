@@ -1,185 +1,151 @@
 # 🍽️ Ohrid Restaurant — Website
 
 Welcome! This is the presentation website of **Ohrid Restaurant**, a cozy fictional
-family restaurant — and a university software engineering project that takes you
-from an empty folder to a fully working, two-language, database-backed web app.
+family restaurant — and a university software engineering project: a modern,
+two-language, fully responsive React site for a small restaurant.
 
 **What you'll find here:**
 
 - 🏠 **8 pages** — Home, About, Menu, Services, Team, News, article pages, Contact
 - 🌍 **2 languages** — English and Macedonian behind one global EN/МК
   switcher (no duplicated pages, everything translates instantly)
-- 🗄️ **Real data** — menu dishes, team members and news articles served by a
-  REST API from a local SQLite database, with photos and trilingual descriptions
-- ✉️ **Working contact form** — validated in the browser *and* on the server,
-  with loading, success and error states, stored in the database
+- 🗄️ **Real content** — menu dishes, team members and news articles with photos
+  and bilingual text, sourced from typed data modules in the frontend
+- ✉️ **Contact form** — fully validated in the browser with loading, success and
+  error states; a valid submission opens the user's email client prefilled
 - 🍪 **Cookie banner** — remembers only your choice, locally. Zero tracking.
 - 📱 **Responsive** — comfortable on phones, tablets and desktops
+- ✨ **Tasteful motion** — hero entrance, scroll reveals, hover effects and page
+  transitions, all respecting `prefers-reduced-motion`
 
 ## ⚡ Start here: one command, whole app
 
-The fastest way to see everything working. This single command builds and starts
-**both services** — backend API and website (the database is a SQLite file,
-no database server needed):
+The fastest way to see everything working: build the React app and serve it
+through nginx, with SPA-friendly routing and caching.
 
 ```bash
-docker compose up --build
+docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
 ```
 
-That's it. Give it a few minutes the first time (it downloads images and
-installs dependencies), then open:
+Give it a couple of minutes the first time (it installs dependencies and builds
+the site), then open:
 
 👉 **http://localhost:8080**
 
-You are looking at the complete product: the nginx web server in the
-`frontend` container serves the site, forwards every `/api/*` call to the
-`backend` container (Fastify), which reads from a SQLite file persisted in
-the `sqlite-data` volume.
-One address, no CORS headaches, no manual wiring.
-
-**What happens behind the scenes on first boot:**
-
-1. 🗄️ `backend` applies Prisma migrations to the SQLite file (data lives in
-   the named `sqlite-data` volume, so it survives restarts) and — only if the
-   database is empty — seeds 6 dishes, 3 team members, 3 news
-   articles and 2 sample messages
-2. 🌐 `frontend` serves the built site and proxies the API
+The `frontend` container builds the site with Vite and serves the static output
+with nginx. There is no backend service and no database server: the restaurant
+data ships as static TypeScript modules inside the frontend (see
+[Where the data lives](#-where-the-data-lives)).
 
 **Everyday Docker commands:**
 
 ```bash
-docker compose ps                # are both services Up?
-docker compose logs -f backend   # peek inside one service (frontend too)
-docker compose down              # stop everything, keep your data
+docker compose ps                # is the frontend service Up?
+docker compose logs -f frontend  # peek inside the container
+docker compose down              # stop everything
 ```
+
+> On the RepoRun platform the base `docker-compose.yml` + `stack.yml` are used
+> directly; the local override only adds the `localhost:8080` port mapping.
 
 ## 🛠️ Tech stack
 
 | Layer | What's inside |
 |-------|---------------|
 | 🎨 Frontend | React 18, TypeScript, Vite, React Router 6, Tailwind CSS + custom CSS |
-| ⚙️ Backend | Node.js 22, Fastify 4, TypeScript, Zod validation, Prisma 5 |
-| 🗃️ Database | SQLite file (`src/backend/prisma/dev.db` locally) with migrations + trilingual seed data |
-| 📦 Delivery | Docker + Docker Compose (one command starts everything) |
-| 📁 Repo | npm workspaces monorepo: `src/frontend` + `src/backend` |
+| 🗃️ Data | Typed in-memory modules (`src/frontend/src/api/*`) — no backend, no database |
+| 📦 Delivery | Docker + Docker Compose + nginx (one command builds and serves the site) |
+| 📁 Repo | npm workspaces monorepo: `src/frontend` |
 
 ## 🗺️ Project tour
 
 ```text
 restaurant/
-  docker-compose.yml          # ⚙️ backend + 🌐 frontend (the single entry point; SQLite file in a volume)
+  docker-compose.yml          # 🐳 frontend build/serve stack (RepoRun entry point)
+  docker-compose.local.yml    # local override: publishes the site on :8080
+  stack.yml                   # RepoRun ingress: route traffic to the frontend
   .env.example                # safe placeholder config — copy to .env, never commit secrets
-  package.json                # workspaces + shared scripts (dev, build, typecheck, db:*)
+  package.json                # workspaces + shared scripts (dev, build, typecheck, up, down)
   src/
     frontend/
-      vite.config.ts          # dev on :5173, /api proxied to the backend
+      vite.config.ts          # dev server on :5173
+      index.html
       src/
         main.tsx / App.tsx    # 🌍 LanguageProvider + Router + Layout
-        api/                  # typed clients: menu, team, news, contact (no fetch in components!)
-        i18n/                 # en/mk dictionaries + language context + pick() helper
-        components/           # Header, Footer, Hero, *Cards, ContactForm, CookieBanner, …
+        api/                  # typed data modules: menu, team, news + contact helper
+        i18n/                 # en/mk JSON dictionaries + language context + pick() helper
+        components/           # Header, Footer, Hero, *Card, ContactForm, CookieBanner, …
         pages/                # Home, About, Menu, Services, Team, News, NewsDetail, Contact
-        styles/               # variables → base → layout → components → responsive
+        styles/               # tailwind → variables → base → layout → components → animations → responsive
       public/images/          # 📸 restaurant photos (served as /images/…)
-      Dockerfile + nginx.conf # production image: static files + /api proxy, SPA fallback
-    backend/
-      prisma/
-        schema.prisma         # MenuItem, TeamMember, NewsPost, ContactMessage
-        migrations/           # versioned SQL — the history of the database
-        seed.ts               # bilingual demo content (idempotent, safe to re-run)
-      src/
-        server.ts / app.ts    # bootstrap + Fastify wiring
-        routes/ → controllers/ → services/ → repositories/
-                              # thin routes, Zod validation, business logic, Prisma only here
-        schemas/              # every external input validated: body, query, params
-        plugins/errorHandler.ts  # friendly 400s, silent 500s (no stack leaks, ever)
-      Dockerfile + entrypoint.sh  # migrate → seed-if-empty → serve
+      Dockerfile + nginx.conf # production image: static files + gzip + SPA fallback
 ```
 
 ## 🧑‍💻 Developing locally (no Docker needed)
 
-The database is just a file — no database server to install or start:
+Everything runs in the browser — no database server and no backend to start:
 
 ```bash
-npm install                  # install all workspaces
-
-cp src/backend/.env.example src/backend/.env
-# default already points at the local SQLite file:
-#   DATABASE_URL="file:./dev.db"
-
-cd src/backend && npx prisma migrate dev && npx prisma db seed && cd ../..
-npm run dev:backend          # terminal 1 → API on http://localhost:3000
-npm run dev:frontend         # terminal 2 → site on http://localhost:5173
+npm install
+npm run dev:frontend         # site on http://localhost:5173
 ```
 
-> 💡 Seeing "could not load" panels in the browser? The frontend is fine — your
-> backend probably isn't running. Check terminal 1.
-
-## 🔌 API reference
-
-Base URL `http://localhost:3000` (or `http://localhost:8080/api/*` via the
-Docker frontend — same API, proxied). Everything speaks JSON.
-
-| Method | Endpoint | What you get |
-|--------|----------|--------------|
-| GET | `/api/health` | `200 {"status":"ok"}` — is it alive? |
-| GET | `/api/menu?category=&availableOnly=` | `200` dishes, id asc (`availableOnly` defaults `true`) |
-| GET | `/api/menu/:id` | `200` one dish (price as a number) · `400` bad id · `404` |
-| GET | `/api/team` | `200` the crew, `sortOrder` asc |
-| GET | `/api/news` | `200` articles, newest first |
-| GET | `/api/news/:slug` | `200` full article (slugs are case-sensitive) · `400` · `404` |
-| POST | `/api/contact` | `201 {"id","message":"Message received"}` · `400` + per-field `issues[]` · `429` if too chatty |
-
-The contact endpoint validates name (2–80), email, optional phone
-(`^[+0-9 ()-]{6,20}$`), subject (3–120) and message (10–2000) — trimmed, in
-both the form and the API — and is rate-limited (~10/15 min per IP, only there).
+Vite gives you hot reload while you edit. To produce a production build:
 
 ```bash
-curl http://localhost:8080/api/menu | head -c 300; echo
-curl -X POST http://localhost:8080/api/contact \
-  -H 'Content-Type: application/json' \
-  -d '{"name":"Ana","email":"ana@example.com","subject":"Table for Friday","message":"A table for two, please!"}'
+npm run build                # tsc --noEmit + vite build → src/frontend/dist
 ```
+
+## 🗄️ Where the data lives
+
+There is no HTTP API in this project. The content is defined in typed modules
+and consumed by the pages through small async functions, so the UI code never
+cares about the source:
+
+- `src/frontend/src/api/menu.ts` — 6 dishes (`getMenu`, `getMenuItem`)
+- `src/frontend/src/api/team.ts` — 3 team members (`getTeam`)
+- `src/frontend/src/api/news.ts` — 3 articles (`getNews`, `getNewsBySlug`)
+- `src/frontend/src/api/contact.ts` — contact-submission contract
+
+Each row carries `…En` / `…Mk` fields that the UI picks at render time, with
+English fallback when a translation is missing.
 
 ## 🧠 Design notes worth knowing
 
-- **Languages without duplication:** UI strings live in three JSON dictionaries;
-  database rows carry `…En/…Mk` columns picked at render time with English
-  fallback. One component tree serves all languages.
-- **Validation twice, errors once:** the form mirrors the Zod rules for instant
-  feedback; the server re-validates everything and returns field-level issues
-  the form displays. Never trust the browser alone.
+- **Languages without duplication:** UI strings live in `i18n/en.json` and
+  `i18n/mk.json`; database-style content carries `…En/…Mk` fields. One component
+  tree serves all languages.
+- **Validation in the browser:** the contact form mirrors simple rules for
+  instant, field-level feedback. A valid submission composes a `mailto:` link
+  with the message prefilled and opens the user's email client.
 - **Images just work:** drop a file in `public/images/` and reference
-  `/images/name.jpg` — from a card or from `seed.ts`. Missing DB images fall
-  back to local placeholders instead of breaking.
-- **Migrations, not magic:** every schema change ships as a versioned SQL file;
-  `migrate deploy` runs automatically inside the backend container.
+  `/images/name.jpg` from a data module. Missing images fall back to local
+  placeholders instead of breaking.
+- **Motion with a fallback:** animations are pure CSS (see `animations.css` and
+  the `Reveal` component) and are disabled under `prefers-reduced-motion`.
 
 ## 📜 Handy commands
 
 ```bash
 npm run dev / build / typecheck        # everything, via workspaces
-npm run dev:frontend | dev:backend     # one app, with hot reload
+npm run dev:frontend                   # Vite dev server with hot reload
 npm run up | down | logs               # the Docker app stack
-npm run db:seed                        # (in src/backend) reseed demo content
-npx prisma studio                      # (in src/backend) DB in your browser :5555
 ```
 
-> Never commit `*.db` / `*.sqlite` files — they are local data (gitignored).
+> Never commit `.env` files — they are ignored via `.gitignore`. Use
+> `.env.example` as a template.
 
 ## 🩺 Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| "Could not load" panels | Backend down — start it, check its terminal |
-| `DATABASE_URL not found` | Copy `src/backend/.env.example` → `.env` |
-| Port busy (`:3000`/`:5173`/`:8080`) | Stop the other instance, or set `PORT=` / `FRONTEND_PORT=` |
-| Prisma type errors after schema edits | `npx prisma generate` (or `migrate dev`) in `src/backend` |
-| Need a clean database | Delete `src/backend/prisma/dev.db` then `npx prisma migrate dev` (host dev) |
+| Blank page after `docker compose up` | Use the local override (or check the RepoRun ingress) — the base compose file does not publish a port |
+| Port busy (`:8080` / `:5173`) | Stop the other instance, or change the mapped port / Vite `server.port` |
+| TypeScript errors | Run `npm run typecheck`; reinstall with `npm install` after dependency changes |
+| Stale styles after editing Tailwind classes | Restart `npm run dev:frontend` so Tailwind rebuilds |
 
 ## 🎓 About
 
 Faculty of Computer Science and Engineering
 
 Subject name: Business Practice
-
