@@ -142,7 +142,7 @@
     "message": "Message",
     "submit": "Send message",
     "sending": "Sending…",
-    "successTitle": "Thank you! Message received.",
+    "successTitle": "Redirected to e-mail client.",
     "successText": "We will reply within one working day.",
     "sendAnother": "Send another message",
     "errorTitle": "Something went wrong",
