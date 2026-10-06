@@ -62,7 +62,11 @@ export default function ContactForm(): JSX.Element {
     ]
       .filter((line) => line !== null)
       .join("\n");
-    window.location.href = `mailto:hello@ohridrestaurant.example?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const link = document.createElement("a");
+    link.href = `mailto:hello@ohridrestaurant.example?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
     setStatus("success");
   }
 
