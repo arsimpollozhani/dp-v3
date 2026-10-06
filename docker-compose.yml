@@ -1,33 +1,33 @@
-# App delivery for RepoRun (and local `docker compose up --build`).
-# Runtime configuration (DATABASE_URL, PORT, NODE_ENV) is set as
-# environment values in the RepoRun stack UI, not committed here.
-# SQLite data lives on a repo-relative bind mount so it survives redeploys.
+# RepoRun stack definition. Set container env values (DATABASE_URL, PORT,
+# NODE_ENV) in the RepoRun Team 24 stack UI, not here.
 services:
   backend:
     build:
       context: .
       dockerfile: src/backend/Dockerfile
-    volumes:
-      - .stack-data/data:/data
     cpus: 0.5
     mem_limit: 512m
+    volumes:
+      - .stack-data/data:/data
     healthcheck:
       test:
-        - CMD
-        - node
-        - -e
-        - "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
-      interval: 10s
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
       timeout: 5s
-      retries: 12
+      retries: 3
       start_period: 20s
 
   frontend:
     build:
       context: .
       dockerfile: src/frontend/Dockerfile
-    cpus: 0.5
-    mem_limit: 512m
+    cpus: 0.25
+    mem_limit: 256m
     depends_on:
       backend:
         condition: service_healthy
