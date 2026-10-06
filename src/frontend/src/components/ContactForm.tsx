@@ -1,7 +1,5 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { ApiError } from "../api/client";
-import { postContact } from "../api/contact";
 import { useLanguage } from "../i18n/LanguageContext";
 
 interface FormValues {
@@ -23,8 +21,7 @@ export default function ContactForm(): JSX.Element {
   const { t } = useLanguage();
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [serverMessage, setServerMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "success">("idle");
 
   const set = (field: keyof FormValues) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -55,33 +52,18 @@ export default function ContactForm(): JSX.Element {
     const fieldErrors = validate(values);
     setErrors(fieldErrors);
     if (Object.keys(fieldErrors).length > 0) return;
-    setStatus("loading");
-    setServerMessage("");
-    try {
-      await postContact({
-        name: values.name.trim(),
-        email: values.email.trim(),
-        phone: values.phone.trim() || undefined,
-        subject: values.subject.trim(),
-        message: values.message.trim(),
-      });
-      setStatus("success");
-    } catch (err) {
-      setStatus("error");
-      if (err instanceof ApiError && err.body?.issues) {
-        const mapped: FieldErrors = {};
-        for (const issue of err.body.issues) {
-          const field = issue.path as keyof FormValues;
-          if (field in EMPTY && !mapped[field]) mapped[field] = issue.message;
-        }
-        setErrors(mapped);
-        setServerMessage(err.body.error ?? t.form.errorGeneric);
-      } else if (err instanceof ApiError && err.body?.error) {
-        setServerMessage(err.body.error);
-      } else {
-        setServerMessage(t.form.errorGeneric);
-      }
-    }
+    const subject = `${values.subject.trim()} (${values.name.trim()})`;
+    const body = [
+      `Name: ${values.name.trim()}`,
+      `Email: ${values.email.trim()}`,
+      values.phone.trim() ? `Phone: ${values.phone.trim()}` : null,
+      "",
+      values.message.trim(),
+    ]
+      .filter((line) => line !== null)
+      .join("\n");
+    window.location.href = `mailto:hello@ohridrestaurant.example?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("success");
   }
 
   if (status === "success") {
@@ -127,12 +109,6 @@ export default function ContactForm(): JSX.Element {
 
   return (
     <form className="form-panel" onSubmit={onSubmit} noValidate>
-      {status === "error" && (
-        <div className="form-error" role="alert">
-          <strong>{t.form.errorTitle}</strong>
-          <p>{serverMessage || t.form.errorGeneric}</p>
-        </div>
-      )}
       {field(
         "name",
         t.form.name,
@@ -210,9 +186,8 @@ export default function ContactForm(): JSX.Element {
       <button
         type="submit"
         className="btn-custom btn-primary-custom"
-        disabled={status === "loading"}
       >
-        {status === "loading" ? t.form.sending : t.form.submit}
+        {t.form.submit}
       </button>
     </form>
   );
