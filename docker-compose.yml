@@ -1,20 +1,16 @@
 # App delivery for RepoRun (and local `docker compose up --build`).
-# The backend SQLite file lives on the named volume `sqlite-data`
-# (DATABASE_URL=file:/data/restaurant.db) so data survives container recreation.
+# Runtime configuration (DATABASE_URL, PORT, NODE_ENV) is set as
+# environment values in the RepoRun stack UI, not committed here.
+# SQLite data lives on a repo-relative bind mount so it survives redeploys.
 services:
   backend:
     build:
       context: .
       dockerfile: src/backend/Dockerfile
-    environment:
-      DATABASE_URL: file:/data/restaurant.db
-      PORT: "3000"
-      NODE_ENV: production
     volumes:
-      - sqlite-data:/data
+      - .stack-data/data:/data
     cpus: 0.5
     mem_limit: 512m
-    restart: unless-stopped
     healthcheck:
       test:
         - CMD
@@ -32,10 +28,6 @@ services:
       dockerfile: src/frontend/Dockerfile
     cpus: 0.5
     mem_limit: 512m
-    restart: unless-stopped
     depends_on:
       backend:
         condition: service_healthy
-
-volumes:
-  sqlite-data:

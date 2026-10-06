@@ -26,3 +26,5 @@
 Thumbs.db
 .vscode/
 .idea/
+# RepoRun/local Docker stack data (SQLite file lives here)
+.stack-data/
