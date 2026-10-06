@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import CookieBanner from "./components/CookieBanner";
 import Footer from "./components/Footer";
@@ -14,6 +15,11 @@ import TeamPage from "./pages/TeamPage";
 
 function Layout(): JSX.Element {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
   return (
     <>
       <Header />
