@@ -16,6 +16,9 @@ export default function Hero(): JSX.Element {
         <img
           src="/images/main_image.jpeg"
           alt=""
+          width="1376"
+          height="768"
+          fetchPriority="high"
           className="h-full w-full animate-ken-burns object-cover opacity-50"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/55 to-ink" />

@@ -16,7 +16,7 @@ export default function MenuCard({ item }: { item: MenuItem }): JSX.Element {
         {item.imageUrl ? (
           <img src={item.imageUrl} alt="" loading="lazy" />
         ) : (
-          <img src="/images/shopska_salad.jpeg" alt="" loading="lazy" />
+          <img src="/images/shopska_salad.webp" alt="" loading="lazy" />
         )}
         {!item.isAvailable && <span className="badge-soldout">{t.menuPage.unavailable}</span>}
       </div>
